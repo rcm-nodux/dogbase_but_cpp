@@ -20,8 +20,12 @@ void runMenu(DogDatabase& db, const char* filename) {
                   << "5. Search dog\n"
                   << "6. Exit\n"
                   << "Your choice: ";
-        std::cin >> choice;
-
+        if (!(std::cin >> choice)) {
+    		std::cin.clear();
+    		std::cin.ignore(32767, '\n');
+    		std::cout << "Invalid input\n";
+    		continue;
+	}
         switch(choice) {
             case 1: db.display(); break;
             case 2: db.add(); break;

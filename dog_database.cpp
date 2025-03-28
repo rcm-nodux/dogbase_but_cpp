@@ -1,7 +1,6 @@
 #include "dog.hpp"
-#include <iostream>
 #include <cstdio>
-#include <cstring>
+
 
 DogDatabase::DogDatabase() : database(nullptr), database_size(0) {}
 
@@ -79,12 +78,13 @@ void DogDatabase::edit(size_t index) {
     std::cout << "The dog has been updated successfully\n";
 }
 
-void DogDatabase::search(const char* name_query, const char* breed_query) const {
+void DogDatabase::search(const char* name_query, const char* breed_query, int age_query) const {
     std::cout << "\nSearch results:\n";
     for(size_t i = 0; i < database_size; ++i) {
         bool name_match = strlen(name_query) == 0 || database[i].contains(name_query);
         bool breed_match = strlen(breed_query) == 0 || database[i].contains(breed_query);
-        if(name_match && breed_match) {
+        bool age_match = (age_query == -1) || (database[i].getAge() == age_query);
+        if(name_match && breed_match && age_match) {
             std::cout << (i+1) << ". " << database[i] << "\n";
         }
     }

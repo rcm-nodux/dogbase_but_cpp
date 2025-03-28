@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstring>
 
 const size_t MAX_LEN = 50;
 
@@ -19,6 +20,7 @@ public:
     const char* getName() const;
     const char* getBreed() const;
     bool contains(const char* query) const;
+	int getAge() const;
 };
 
 class DogDatabase {
@@ -35,7 +37,7 @@ public:
     void add();
     void remove(size_t index);
     void edit(size_t index);
-    void search(const char* name_query, const char* breed_query) const;
+    void search(const char* name_query, const char* breed_query, int age_query) const;
     size_t size() const;
 };
 

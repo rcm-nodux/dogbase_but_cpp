@@ -1,5 +1,5 @@
 #include "dog.hpp"
-#include <cstring>
+
 
 Dog::Dog() : age(0) {
     name[0] = '\0';
@@ -40,6 +40,7 @@ std::istream& operator>>(std::istream& is, Dog& dog) {
 
 const char* Dog::getName() const { return name; }
 const char* Dog::getBreed() const { return breed; }
+int Dog::getAge() const { return age; }
 
 bool Dog::contains(const char* query) const {
     return strstr(name, query) || strstr(breed, query);

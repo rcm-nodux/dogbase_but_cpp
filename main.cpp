@@ -50,28 +50,28 @@ void runMenu(DogDatabase& db, const char* filename) {
                 break;
             }
             case 5: {
-				std::cin.ignore();
-				char name_query[MAX_LEN] = {0};
-				char breed_query[MAX_LEN] = {0};
-				char age_input[MAX_LEN] = {0};
-				int age_query = -1;
-				std::cout << "Enter a name for search (or empty for skip): ";
-				std::cin.getline(name_query, MAX_LEN);
-				std::cout << "Enter a breed for search (or empty for skip): ";
-				std::cin.getline(breed_query, MAX_LEN);
-				std::cout << "Enter age for search (or empty for skip): ";
-				std::cin.getline(age_input, MAX_LEN);
-				if (strlen(age_input) > 0) {
-					try {
-						age_query = std::stoi(age_input);
-					} catch (...) {
-						std::cout << "Invalid age input. Age will be ignored.\n";
-						age_query = -1;
-					}
-				}
-
-				db.search(name_query, breed_query, age_query);
-				break;
+		std::cin.ignore();
+		char name_query[MAX_LEN] = {0};
+		char breed_query[MAX_LEN] = {0};
+		char age_input[MAX_LEN] = {0};
+		int age_query = -1;
+		std::cout << "Enter a name for search (or empty for skip): ";
+		std::cin.getline(name_query, MAX_LEN);
+		std::cout << "Enter a breed for search (or empty for skip): ";
+		std::cin.getline(breed_query, MAX_LEN);
+		std::cout << "Enter age for search (or empty for skip): ";
+		std::cin.getline(age_input, MAX_LEN);
+		if (strlen(age_input) > 0) {
+			try {
+				age_query = std::stoi(age_input);
+			} catch (...) {
+				std::cout << "Invalid age input. Age will be ignored.\n";
+				age_query = -1;
+			}
+		}
+	
+		db.search(name_query, breed_query, age_query);
+		break;
             }
             case 6: {
                 db.save(filename);

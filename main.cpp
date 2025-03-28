@@ -50,11 +50,15 @@ void runMenu(DogDatabase& db, const char* filename) {
                 break;
             }
             case 5: {
-                char query[MAX_LEN];
-                std::cout << "Enter a name or breed to search: ";
-                std::cin >> query;
-                db.search(query);
-                break;
+				std::cin.ignore();
+				char name_query[MAX_LEN] = {0};
+				char breed_query[MAX_LEN] = {0};
+				std::cout << "Enter a name for search (or empty for skip): ";
+				std::cin.getline(name_query, MAX_LEN);
+				std::cout << "Enter a breed for search (or empty for skip): ";
+				std::cin.getline(breed_query, MAX_LEN);
+				db.search(name_query, breed_query);
+				break;
             }
             case 6: {
                 db.save(filename);

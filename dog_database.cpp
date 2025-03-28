@@ -1,6 +1,7 @@
 #include "dog.hpp"
 #include <iostream>
 #include <cstdio>
+#include <cstring>
 
 DogDatabase::DogDatabase() : database(nullptr), database_size(0) {}
 
@@ -21,20 +22,16 @@ void DogDatabase::resize(size_t new_size) {
 void DogDatabase::load(const char* filename) {
     std::ifstream file(filename, std::ios::binary | std::ios::ate);
     if (!file) {
-        std::cout << "Failed to open file for reading\nLet's start with an empty database\n";
+        std::cout << "Failed to open file for reading\nStart with an empty database\n";
         return;
     }
-
     size_t file_size = file.tellg();
     file.seekg(0);
-
     size_t new_size = file_size / sizeof(Dog);
     if (new_size == 0) return;
-
     delete[] database;
     database = new Dog[new_size];
     database_size = new_size;
-
     file.read(reinterpret_cast<char*>(database), file_size);
 }
 
@@ -52,7 +49,6 @@ void DogDatabase::display() const {
         std::cout << "The database is empty\n";
         return;
     }
-
     std::cout << "\nDog Database:\n";
     for(size_t i = 0; i < database_size; ++i) {
         std::cout << (i+1) << ". " << database[i] << "\n";
@@ -83,10 +79,12 @@ void DogDatabase::edit(size_t index) {
     std::cout << "The dog has been updated successfully\n";
 }
 
-void DogDatabase::search(const char* query) const {
+void DogDatabase::search(const char* name_query, const char* breed_query) const {
     std::cout << "\nSearch results:\n";
     for(size_t i = 0; i < database_size; ++i) {
-        if(database[i].contains(query)) {
+        bool name_match = strlen(name_query) == 0 || database[i].contains(name_query);
+        bool breed_match = strlen(breed_query) == 0 || database[i].contains(breed_query);
+        if(name_match && breed_match) {
             std::cout << (i+1) << ". " << database[i] << "\n";
         }
     }

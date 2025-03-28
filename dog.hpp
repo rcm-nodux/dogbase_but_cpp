@@ -35,7 +35,7 @@ public:
     void add();
     void remove(size_t index);
     void edit(size_t index);
-    void search(const char* query) const;
+    void search(const char* name_query, const char* breed_query) const;
     size_t size() const;
 };
 

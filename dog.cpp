@@ -19,12 +19,22 @@ std::ostream& operator<<(std::ostream& os, const Dog& dog) {
 }
 
 std::istream& operator>>(std::istream& is, Dog& dog) {
-    std::cout << "Enter Name of dog: ";
-    is >> dog.name;
-    std::cout << "Enter Age of dog: ";
-    is >> dog.age;
-    std::cout << "Enter Breed of dog: ";
-    is >> dog.breed;
+    std::cout << "Enter the Name of the dog: ";
+	std::cin.ignore();
+    std::cin.getline(dog.name, MAX_LEN);
+    bool valid_age = false;
+    while(!valid_age) {
+        std::cout << "Enter the Age of the dog: ";
+        if(is >> dog.age && dog.age > 0 && dog.age < 41) { 
+            valid_age = true;
+        } else {
+            std::cout << "Error. Enter age from 1 to 40\n";
+            is.clear();
+        }
+        is.ignore(32767, '\n');
+    }
+    std::cout << "Enter the Breed of the dog: ";
+    std::cin.getline(dog.breed, MAX_LEN);
     return is;
 }
 
